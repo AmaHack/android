@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/zocial.css" />
+        <link rel="stylesheet" type="text/css" href="modules/common/css/merci.css" media="screen" />
+        <title>Hello World</title>
+        
+        <script type="text/javascript" src="modules/common/js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery.history.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery.ba-serializeobject.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery.mcheckin.js"></script>
+        <script type="text/javascript" src="modules/common/js/scrollability.min.js"></script>
+        <script type="text/javascript" src="modules/common/js/NewUIScripts.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery.jcarousel.js"></script>
+        <script type="text/javascript" src="modules/common/js/iscroll.js"></script>
+        <script type="text/javascript" src="modules/common/js/jquery-ui-1.8.6.custom.min.js"></script>
+
+
+        
+        <script src="cordova.js"></script>
+        <!-- cordova facebook plugin -->
+		<script src="cdv-plugin-fb-connect.js"></script>
+	    <!-- facebook js sdk -->
+		<script src="facebook-js-sdk.js"></script>
+
+        <script>
+            
+            function onBodyLoad()
+            {
+                console.log("onBodyLoad");
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+        
+        
+        function onDeviceReady()
+        {
+            // do your thing!
+            console.log("onDeviceReady");
+            //navigator.notification.alert("Cordova is working")
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            
+            function onSuccess(position)
+            {
+                currLat = position.coords.latitude;
+                currLong = position.coords.longitude;
+                currAlt = position.coords.altitude;
+                console.log('Lat:'+currLat+'Long:'+currLong);
+                console.log('Alt:'+currAlt);
+            }
+            
+            function onError(error) {
+                cosole.log('code: '    + error.code    + '\n' +
+                           'message: ' + error.message + '\n');
+            }
+            
+            try {
+                alert('Device is ready! Make sure you set your app_id below this alert.');
+                FB.init({ appId: "642248459160399", nativeInterface: CDV.FB, useCachedDialogs: false });
+                document.getElementById('data').innerHTML = "";
+            } catch (e) {
+                alert(e);
+            }
+            
+            helloWorldApp.launch(['success'], locationSuccess, locationFailure);
+
+        }
+        
+        function locationSuccess(cityValue)
+        {
+            console.log("Location call success");
+            currentCityName = cityValue;
+        }
+        
+        function locationFailure(error)
+        {
+            console.log("Location call failure");
+        }
+
+
+        var AccessTokenByFB;
+        var currentCityName;
+        var facebookCurrentLocation;
+        var facebookCurrentCity = [];
+        
+        <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
+        if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
+        if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
+        if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
+        
+//        FB.Event.subscribe('auth.login', function(response) {
+//                           alert('auth.login event');
+//                           });
+//                           
+//                           FB.Event.subscribe('auth.logout', function(response) {
+//                                              $("#overlay").hide();
+//                                              alert('auth.logout event');
+//                                              });
+//                                              
+//                                              FB.Event.subscribe('auth.sessionChange', function(response) {
+//                                                                 alert('auth.sessionChange event');
+//                                                                 });
+//
+//                                                                 FB.Event.subscribe('auth.statusChange', function(response) {
+//                                                                                    alert('auth.statusChange event');
+//                                                                                    });
+
+                                                                                    /*function getSession() {
+                                                                                     alert("session: " + JSON.stringify(FB.getSession()));
+                                                                                     }
+                                                                                     */
+        function getLoginStatus() {
+        alert('getloginstatus');
+            FB.getLoginStatus(function(response)
+                              {
+                              if (response.status == 'connected')
+                              {
+                              alert('logged in');
+                              }
+                              else if (response.status == 'not_authorized')
+                              {
+                              alert('App not authorized. Kindly permit the app and try again.');
+                              }
+                              else
+                              {
+                              alert('Kindly login and and try again.');
+                              }
+                              
+                              });
+        }
+        
+        function logout() {
+            FB.logout(function(response) {
+                      //                      alert('logged out');
+                      });
+        }
+
+        var friendIDs = [];
+        var fdata;
+        function me() {
+            FB.api('/me/friends', { fields: 'id, name, picture' },  function(response) {
+                   if (response.error) {
+                   alert(JSON.stringify(response.error));
+                   } else {
+                   var data = document.getElementById('data');
+                   fdata=response.data;
+                   console.log("fdata: "+fdata);
+                   response.data.forEach(function(item) {
+                                         var d = document.createElement('div');
+                                         d.innerHTML = "<img src="+item.picture+"/>"+item.name;
+                                         data.appendChild(d);
+                                         });
+                   }
+                   var friends = response.data;
+                   console.log(friends.length);
+                   for (var k = 0; k < friends.length && k < 200; k++) {
+                   var friend = friends[k];
+                   var index = 1;
+                   
+                   friendIDs[k] = friend.id;
+                   //friendsInfo[k] = friend;
+                   }
+                   console.log("friendId's: "+friendIDs);
+                   });
+        }
+        
+        
+        function login() {
+            FB.login(
+                     function(response) {
+                     alert('venkat:'+response);
+                     getLoginStatus();
+                     
+                     FB.api('/me', function(response) {
+                            
+                            if (response.authResponse != null)
+                            {
+                            
+                            var access_token =   FB.getAuthResponse()['accessToken'];
+                            
+                            AccessTokenByFB = access_token;
+                            console.log("AccessTokenByFB " + AccessTokenByFB);
+                            }
+                            
+                            
+                            console.log('Good to see you, ' + response.name + '.');
+                            alert("Good to see you, " + response.name + ".")
+                            
+                            facebookCurrentLocation = response.location.name;
+                            console.log("facebookCurrentLocation " + facebookCurrentLocation);
+                            var re = /\s*, \s*/;
+                            facebookCurrentCity = facebookCurrentLocation.split(re);
+                            alert("facebookCurrentCity " + facebookCurrentCity[0]);
+                            
+                            getFriendsCheckins();
+
+                            });
+                     
+                     if (response.session)
+                     {
+                                                 alert('logged in');
+                     }
+                     else
+                     {
+                                                  alert('not logged in');
+                     }
+                     },
+                     { scope: "user_location, user_events friends_activities, friends_groups, friends_interests, friends_likes, friends_location, friends_events, friends_photos, friends_status, friends_groups, friends_likes, user_friends, user_interests, user_photo_video_tags, friends_photo_video_tags"}
+                     );
+        }
+        
+        
+        function facebookWallPost() {
+            console.log('Debug 1');
+            var params = {
+                method: 'feed',
+                name: 'Facebook Dialogs',
+                link: 'https://developers.facebook.com/docs/reference/dialogs/',
+                picture: 'http://fbrell.com/f8.jpg',
+                caption: 'Reference Documentation',
+                description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+            };
+            console.log(params);
+            FB.ui(params, function(obj) { console.log(obj);});
+        }
+        
+        function publishStoryFriend() {
+            randNum = Math.floor ( Math.random() * friendIDs.length );
+            
+            var friendID = friendIDs[randNum];
+            if (friendID == undefined){
+                alert('please click the me button to get a list of friends first');
+            }else{
+                console.log("friend id: " + friendID );
+                console.log('Opening a dialog for friendID: ', friendID);
+                var params = {
+                    method: 'feed',
+                    to: friendID.toString(),
+                    name: 'Facebook Dialogs',
+                    link: 'https://developers.facebook.com/docs/reference/dialogs/',
+                    picture: 'http://fbrell.com/f8.jpg',
+                    caption: 'Reference Documentation',
+                    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+                };
+                FB.ui(params, function(obj) { console.log(obj);});
+            }
+        }
+        
+        var arrOfPlaces = new Array();
+        function getFriendsCheckins()
+        {
+            
+            document.getElementById("loadingDiv").style.display = "block";
+            
+            alert("getFriendsCheckins");
+            var friendsCount = 0;
+            var count = 0;
+            var one = 1;
+            
+            FB.api('/me/friends', { fields: 'id, name'},  function(response)
+                   {
+                   
+                   if (response.error)
+                   {
+                   alert(JSON.stringify(response.error));
+                   }
+                   else
+                   {
+                   var data = document.getElementById('data');
+                   fdata=response.data;
+                   
+                   friendsCount = fdata.length;
+                   console.log("friendsCount -- " + friendsCount);
+                   
+                   getFriendsTaggedPlacesList();
+                   
+                   for(var i = 0; i < friendsCount; i++)
+                   {
+                   console.log("/" + fdata[i].id + "?fields=checkins.since(1351063053).limit(10).fields(message,place)");
+                   
+                   FB.api('/' + fdata[i].id + '?fields=checkins.since(1351063053).limit(10).fields(message,place)', function (result)
+                          {
+                          
+                          if(!result || result.error)
+                          {
+                          
+                          }
+                          else
+                          {
+                          var checkinElement = result.checkins.data;
+                          var checkinElementCount = result.checkins.data.length;
+                          console.log("checkinElementCount " + checkinElementCount);
+                          
+                          for(var j = 0; j < checkinElement.length; j++)
+                          {
+                          if(checkinElement[j].place != null)
+                          {
+                          
+                          var placeName = checkinElement[j].place.name;
+                          console.log("placeName " + placeName);
+                          var locationDetails = checkinElement[j].place.location;
+                          
+                          var locationCity;// = checkinElement[j].place.location.city;
+                          if(checkinElement[j].place.location.city != null)
+                          {
+                          locationCity = checkinElement[j].place.location.city;
+                          }
+                          else
+                          {
+                          continue;
+                          }
+                          console.log("locationCity " + locationCity);
+                          var locationState = checkinElement[j].place.location.state;
+                          var locationCountry = checkinElement[j].place.location.country;
+                          
+                          arrOfPlaces.push(locationCity);
+                          }
+                          else
+                          {
+                          continue;
+                          }
+                          
+                          }
+                          }
+                          });
+                   }
+                   }
+                   });
+        }
+        
+        function displayMostCheckedInresult()
+        {
+            arrOfPlaces.sort();
+            
+            var frequency = {};  // array of frequency.
+            var max = 0;  // holds the max frequency.
+            var result;   // holds the max frequency element.
+            
+            var MostVisitedPlaceResult;
+            var MostVisitedPlaceResultCount;
+            
+            for(var v in arrOfPlaces)
+            {
+                frequency[arrOfPlaces[v]]=(frequency[arrOfPlaces[v]] || 0)+1; // increment frequency.
+                
+                if(frequency[arrOfPlaces[v]] > max)
+                {
+                    // is this frequency > max so far ?
+                    max = frequency[arrOfPlaces[v]];  // update max.
+                    result = arrOfPlaces[v];          // update result.
+                }
+            }
+            
+            var arrPlacesWithElementCount = array_count_values(arrOfPlaces);
+            
+            var dataArray = [];
+            for (cityName in arrPlacesWithElementCount) {
+                var count = arrPlacesWithElementCount[cityName];
+                dataArray.push({cityName: cityName, count: count});
+            }
+            
+            dataArray.sort(function(a, b){
+                           if (a.count > b.count) return -1;
+                           if (b.count > a.count) return 1;
+                           return 0;
+                           });
+                           
+//           <!-- alert("dataArray " + JSON.stringify(dataArray)); -->
+
+           var mostVisitedCity = dataArray[0].cityName;
+           var mostVisitedCityCount = dataArray[0].count;
+//           alert("Most visited city " + dataArray[0].cityName + " - " + dataArray[0].count + " friends.");
+
+           var secondmostVisitedCity = dataArray[1].cityName;
+           var secondmostVisitedCityCount = dataArray[1].count;
+//           alert("2nd Most visited city " + dataArray[1].cityName + " - " + dataArray[1].count + " friends.");
+
+           var thirdmostVisitedCity = dataArray[2].cityName;
+           var thirdmostVisitedCityCount = dataArray[2].count;
+//           alert("3rd Most visited city " + dataArray[2].cityName + " - " + dataArray[2].count + " friends.");
+           
+           if(mostVisitedCity == facebookCurrentCity[0])
+           {
+               if(secondmostVisitedCity == currentCityName)
+               {
+                   MostVisitedPlaceResult = dataArray[2].cityName;
+                   MostVisitedPlaceResultCount = dataArray[2].count;
+               }
+               else
+               {
+                   MostVisitedPlaceResult = dataArray[1].cityName;
+                   MostVisitedPlaceResultCount = dataArray[1].count;
+               }
+           }
+           else if (currentCityName == mostVisitedCity)
+           {
+               MostVisitedPlaceResult = dataArray[1].cityName;
+               MostVisitedPlaceResultCount = dataArray[1].count;
+           }
+           else
+           {
+               MostVisitedPlaceResult = dataArray[0].cityName;
+               MostVisitedPlaceResultCount = dataArray[0].count;
+           }
+           
+//           <!-- alert("MostVisitedPlaceResult - MostVisitedPlaceResultCount " + MostVisitedPlaceResult + MostVisitedPlaceResultCount + " friends.");-->
+
+           
+//           <!-- var keys=[]; -->
+//           <!-- keys = Object.keys(arrPlacesWithElementCount);-->
+//           <!-- var indexOfResult = keys.indexOf(result);-->
+//           <!-- alert("indexOf " + result + indexOfResult);-->
+//           <!-- alert("Value for result " + arrPlacesWithElementCount[result]);-->
+
+           alert(MostVisitedPlaceResultCount + " of your friends have visited " + MostVisitedPlaceResult + ". Would you like to try?");
+           logout();
+       
+        }
+        
+        
+        //TAGGED PHOTOS
+        var arrOfPlacesTagged = new Array();
+        function getFriendsTaggedPlacesList()
+        {
+            alert("getFriendsTaggedPlacesList");
+            var friendsCount = 0;
+            var count = 0;
+            var one = 1;
+            
+            FB.api('/me/friends', { fields: 'id, name'},  function(response)
+                   {
+                   if (response.error)
+                   {
+                   alert(JSON.stringify(response.error));
+                   }
+                   else
+                   {
+                   var data = document.getElementById('data');
+                   fdata=response.data;
+                   
+                   friendsCount = fdata.length;
+                   console.log("friendsCount -- " + friendsCount);
+                   
+                   
+                   for(var x = 0; x < friendsCount; x++)
+                   {
+                   friendIDs.push(fdata[x].id);
+                   }
+                   
+                   friendIDs.push("");
+                   console.log("friendIDs count -- " + friendIDs.length);
+
+                   for(var i = 0; i < friendIDs.length; i++)
+                   {
+                   console.log("/" + friendIDs[i] + "?fields=tagged.fields(place),photos.since(1345567260).limit(25).fields(tags.fields(name),name,from,place)");
+                   
+                   FB.api('/' + friendIDs[i] + '?fields=tagged.fields(place),photos.since(1345567260).limit(25).fields(tags.fields(name),name,from,place)', function (result)
+                          {
+                          
+                          if(result.error)
+                          {
+                          console.log("result.error " + JSON.stringify(result.error));
+                          if(result.error.code == "100")
+                          {
+                          document.getElementById("loadingDiv").style.display = "none";
+                          displayMostCheckedInresult();
+                          }
+                          
+                          }
+                          else
+                          {
+                          var taggedcheckinElement = result.photos.data;
+                          var taggedcheckinElementCount = result.photos.data.length;
+                          console.log("taggedcheckinElementCount " + taggedcheckinElementCount);
+                          
+                          for(var j = 0; j < taggedcheckinElement.length; j++)
+                          {
+
+                          if (taggedcheckinElement[j].place != null)
+                          {
+                          
+                          var placeName = taggedcheckinElement[j].place.name;
+                          console.log("placeName " + placeName);
+                          var locationDetails = taggedcheckinElement[j].place.location;
+                          
+                          
+                          var locationCity;// = taggedcheckinElement[j].place.location.city;
+                          
+                          if(taggedcheckinElement[j].place.location.city != null)
+                          {
+                          locationCity = taggedcheckinElement[j].place.location.city;
+                          }
+                          else
+                          {
+                          continue;
+                          }
+                          
+                          console.log("locationCity " + locationCity);
+                          var locationState = taggedcheckinElement[j].place.location.state;
+                          var locationCountry = taggedcheckinElement[j].place.location.country;
+                          
+                          arrOfPlaces.push(locationCity);
+                          
+                          }
+                          else
+                          {
+                          continue;
+                          }
+                          
+                          
+                          }
+                          }
+                          });
+                   }
+                   }
+                   });
+        }
+        
+        
+        function displayMostTaggedCheckedInresult()
+        {
+            
+            var frequency = {};  // array of frequency.
+            var max = 0;  // holds the max frequency.
+            var result;   // holds the max frequency element.
+            for(var v in arrOfPlacesTagged)
+            {
+                frequency[arrOfPlacesTagged[v]]=(frequency[arrOfPlacesTagged[v]] || 0)+1; // increment frequency.
+                
+                if(frequency[arrOfPlacesTagged[v]] > max)
+                {
+                    // is this frequency > max so far ?
+                    max = frequency[arrOfPlacesTagged[v]];  // update max.
+                    result = arrOfPlacesTagged[v];          // update result.
+                }
+            }
+            alert(max + " of your friends have visited " + result + ". Would you like to try?");
+            
+        }
+        
+        
+        function array_count_values (array) {
+            // http://kevin.vanzonneveld.net
+            // +   original by: Ates Goral (http://magnetiq.com)
+            // + namespaced by: Michael White (http://getsprink.com)
+            // +      input by: sankai
+            // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+            // +   input by: Shingo
+            // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
+            // *     example 1: array_count_values([ 3, 5, 3, "foo", "bar", "foo" ]);
+            // *     returns 1: {3:2, 5:1, "foo":2, "bar":1}
+            // *     example 2: array_count_values({ p1: 3, p2: 5, p3: 3, p4: "foo", p5: "bar", p6: "foo" });
+            // *     returns 2: {3:2, 5:1, "foo":2, "bar":1}
+            // *     example 3: array_count_values([ true, 4.2, 42, "fubar" ]);
+            // *     returns 3: {42:1, "fubar":1}
+            var tmp_arr = {},
+            key = '',
+            t = '';
+            
+            var __getType = function (obj) {
+                // Objects are php associative arrays.
+                var t = typeof obj;
+                t = t.toLowerCase();
+                if (t === "object") {
+                    t = "array";
+                }
+                return t;
+            };
+            
+            var __countValue = function (value) {
+                switch (typeof value) {
+                    case "number":
+                    if (Math.floor(value) !== value) {
+                        return;
+                    }
+                    // Fall-through
+                    case "string":
+                    if (value in this && this.hasOwnProperty(value)) {
+                        ++this[value];
+                    } else {
+                        this[value] = 1;
+                    }
+                }
+            };
+            
+            t = __getType(array);
+            if (t === 'array') {
+                for (key in array) {
+                    if (array.hasOwnProperty(key)) {
+                        __countValue.call(tmp_arr, array[key]);
+                    }
+                }
+            }
+            console.log("tmp_arr " + JSON.stringify(tmp_arr));
+            return tmp_arr;
+        }
+        
+        </script>
+    </head>
+    <body onload="onBodyLoad()">
+        
+        <br></br>
+        <a href="#" class="zocial facebook" onclick="login()">Sign in with Facebook</a>
+
+        <div id="data">loading ...</div>
+        
+        <div id="loadingDiv" style="display:none;">
+            <p>Getting friend list</p>
+            <p>Getting places from friends checkins </p>
+            <p>Getting places from friends photo tags</p>
+            <img src="ajax-loader.gif" alt="Sample Image"></img>
+        </div>
+        
+        <div id="fb-root"></div>
+        
+        <div class="app"></div>
+        
+        <div id="layout" class="checkinAT"></div>
+        <div id="serviceoverlayCKIN"></div>
+        <div id="overlayCKIN" class="overlayCKIN displayNone"></div>
+        <input type="hidden" id="MyMERCICheckInURL" />
+        <input type="hidden" id="MyCPRRetrievalURL" />
+        
+        <div id="splashScreen" class="splash-screen initialRender">
+            <div class="loading clearfix">
+                <img src="modules/common/img/indicator_blue_large.gif" alt="Loading bar" />
+            </div>
+        </div>
+        
+        
+        
+        <script type="text/javascript" src="js/helloWorldPlugin.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/phonegap-nfc-0.4.3-SNAPSHOT.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/handlebars.js"></script>
+        
+        <script type="text/javascript" src="aria/aria-templates-1.3-7.js"></script>
+        <script type="text/javascript" src="mobile-statics.js"></script>
+        <script type="text/javascript" src="merci-skin.js"></script>
+        
+
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript">
+            
+         //   app.initialize();
+                    
+        </script>
+        
+        <div id="log"></div>
+
+    </body>
+</html>
