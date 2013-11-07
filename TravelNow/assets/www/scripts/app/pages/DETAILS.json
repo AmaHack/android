@@ -1,0 +1,21 @@
+{
+    contents : {
+        placeholderContents : {
+        },
+        menus : {
+        }
+    },
+    pageComposition : {
+        template : "app.templates.details.Layout",
+        css : [], // available since Aria Templates 1.3-7
+        placeholders : {},
+        modules : {}
+    },
+    pageId : "DETAILS",
+    url : "/details",
+    title : "Travel Now | DETAILS",
+    animation : { // available since Aria Templates 1.4-2
+        animateIn : "slide left",
+        animateOut : "slide right"
+    }
+}

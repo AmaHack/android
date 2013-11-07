@@ -1,0 +1,820 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body {
+	padding:0;
+	margin:0;
+	background:#dcdcdc;
+	font-family:Arial
+}
+ul, ol {
+	padding:0;
+	margin:0;
+	list-style: none;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+}
+.strong { font-weight:bold }
+.normal { color:#ccc }
+.alignLeft { text-align:left }
+.alignRight { text-align:right }
+section {
+	background:#fff;
+	width:95%;
+	margin:10px auto;
+	border:1px solid #a5a5a5;
+	position:relative
+}
+section:before, section:after {
+	content:"";
+	position:absolute;
+	bottom:-5px;
+	background:#bbbbbb;
+	height:10px;
+	width:50%;
+	z-index:-1;
+}
+section:before { left:5px }
+section:after { right:5px }
+header {
+	background:#eeeeee;
+	position:relative
+}
+header .airCraftIco {
+	background:url(../img/icons.png) no-repeat 7px 7px;
+	background-size:30px 316px;
+	font-size:120%;
+	display:inline-block;
+	padding:10px 5px 10px 40px
+}
+.dateHolder {
+	position:absolute;
+	right:0px;
+	top:0px;
+}
+.dateHolder .date {
+	font-weight:bold;
+	font-size:220%;
+	color:#559bdd;
+	padding-right:7px;
+	position:absolute;
+	top:2px;
+	right:0px
+}
+.dateHolder .day {
+	position:absolute;
+	top:2px
+}
+.dateHolder .month, .dateHolder .day {
+	padding-right:45px;
+	font-size:70%;
+	position:relative;
+	top:7px
+}
+.dateHolder .month {
+	top:8px;
+	color:#559bdd;
+	font-weight:bold
+}
+.airlineLogo img {
+	width:55px;
+	height:55px;
+	margin:0px;
+	display:inline-block;
+	padding:10px 10px 5px 10px
+}
+.itineraryInfo { position:relative; }
+.departureInfo, .arrivalInfo {
+	position:absolute;
+	width:23%;
+}
+.departureInfo {
+	top:5px;
+	left:70px;
+}
+.departureInfo .time {
+	font-size:160%;
+	font-weight:bold
+}
+.departureInfo .airportNamLeft, .arrivalInfo .airportNamLeft {
+	color:#559bdd;
+	font-size:70%;
+	padding:3px 0px 0px 5px
+}
+.arrivalInfo {
+	top:5px;
+	right:10px;
+	text-align:right
+}
+.arrivalInfo .time {
+	font-size:160%;
+	font-weight:bold;
+}
+.airportInfo {
+	position:absolute;
+	left:145px;
+	top:15px;
+}
+.airportInfo ul li {
+	display:table-cell;
+	text-align:center;
+	font-size:95%
+}
+.airportInfo ul li span {
+	display:block;
+	color:#777777;
+	margin-right:5px
+}
+.airportCode { color:#777777 }
+.airportInfo .stops {
+	color:#559bdd;
+	background:url(../img/stops.png) no-repeat 50% 50%;
+	background-size:30px 19px;
+}
+.smallFont {
+	font-size:75%;
+	padding-top:3px
+}
+/*Search page*/
+
+.searchPanel { background:#559bdd }
+.searchPanel ul { position:relative }
+.searchPanel ul:after {
+	content:"";
+	position:absolute;
+	width:100%;
+	height:10px;
+	background:#fff;
+	border-bottom:1px solid #c7c7c7
+}
+
+.searchPanel ul:after{ width:auto}
+.selected {
+	background:url(../img/pointer.png) no-repeat 50% 100%;
+	-webkit-background-size:20px 7px;
+}
+.searchPanel li {
+	display:inline-block;
+	width:49%;
+	text-align:center
+}
+.searchPanel li:first-child { border-right:1px solid #aacdee }
+.searchPanel .oneWay, .searchPanel .roundTrip {
+	display:inline-block;
+	padding:15px 10px;
+	color:#fff;
+	font-weight:bold;
+	font-size:120%
+}
+.searchPanel .oneWay {
+	background:url(../img/oneway.png) no-repeat 0 50%;
+	-webkit-background-size:25px 21px;
+	padding-left:30px;
+}
+.searchPanel .roundTrip {
+	background:url(../img/roundTrip.png) no-repeat 0 50%;
+	-webkit-background-size:40px 28px;
+	padding-left:45px
+}
+.formElements {
+	background:#fff;
+	margin-top:10px
+}
+.formElements li {
+	border-bottom:1px solid #c7c7c7;
+	padding:15px 10px 15px 50px
+}
+.date li { border:none }
+.departure, .arrival {
+	background:url(../img/departure.png) no-repeat 10px 50%;
+	-webkit-background-size:20px 27px;
+}
+.economy {
+	background:url(../img/class.png) no-repeat 10px 50%;
+	-webkit-background-size:18px 23px;
+}
+.passengers {
+	background:url(../img/passenger.png) no-repeat 10px 50%;
+	-webkit-background-size:23px 23px;
+}
+.moreOptions {
+	background:url(../img/moreOptions.png) no-repeat 10px 50%;
+	-webkit-background-size:23px 23px;
+}
+.formElements li.date { padding:0px }
+.date li {
+	display:inline-block;
+	width:35%;
+	padding:0px 0px 0px 50px
+}
+.depDate, .ariDate {
+	background:url(../img/calendar.png) no-repeat 8px 50%;
+	-webkit-background-size:25px 28px;
+	position:relative
+}
+.depDate span:nth-child(1), .ariDate span:nth-child(1) {
+	position:absolute;
+	top:12px;
+}
+.depDate span:nth-child(2), .ariDate span:nth-child(2) {
+	color:#559bdd;
+	position:absolute;
+	bottom:10px;
+}
+.depDate span:nth-child(3), .ariDate span:nth-child(3) {
+	color:#559bdd;
+	font-weight:bold;
+	font-size:3.1em;
+	padding-left:45px
+}
+/*Comp*/
+#header {
+	position:absolute;
+	z-index:2;
+	top:0;
+	left:0;
+	width:100%;
+	height:45px;
+	line-height:45px;
+	background:#f8f9f9;
+	padding:0;
+	color:#212121;
+	text-align:center;
+	background:url(../img/amadeus.png) no-repeat 50% 50%;
+	background-size:250px 36px
+}
+.backButton {
+	position:absolute;
+	width:60px;
+	height:40px;
+	background:url(../img/backButton.png) no-repeat 50% 50%;
+	left:0px;
+	top:3px;
+	background-size:35px 33px
+}
+#header a {
+	color:#212121;
+	text-decoration:none;
+	font-weight:bold;
+	display:inline-block;
+		width:60px;
+	height:40px;
+}
+#footer {
+	position:absolute;
+	z-index:2;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:50px;
+	background:#343434;
+	padding:0;
+	border-top:1px solid #444;
+}
+#footer div.button {
+	background: -webkit-gradient(linear, 0 100%, 0 0, from(#01529f), color-stop(100%, #1875cd));
+	width:98%;
+	color:#fff;
+	text-align:center;
+	margin:0.8% auto;
+	padding:9px 0px;
+	text-shadow:-1px -1px 1px #000
+}
+#wrapper {
+	position:absolute;
+	z-index:1;
+	top:0;
+	bottom:48px;
+	left:0;
+	width:100%;
+	background:#fff;
+	overflow:auto;
+}
+#scroller {
+	position:absolute;
+	z-index:1;
+	/*	-webkit-touch-callout:none;*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	width:100%;
+	padding:0;
+}
+#scroller ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+#scroller li { font-size:14px; }
+.img { background:#fff }
+.images {
+	background:url(../img/travel2.jpg) 50% 0% no-repeat;
+	height:400px;
+	background-size:100%;
+	padding:5px;
+	width:100%;
+	margin:0% auto;
+	border:1px solid #468bd0;
+}
+.facebookLogin {
+	background:#fff;
+	padding:10px
+}
+.facebookLogin div {
+	background:url(../img/facebook.png) no-repeat 50% 50%;
+	background-size:150px 31px;
+	height:50px;
+	text-indent:-9999px
+}
+#homeScreen #header { height:0px; }
+#wrapper.detailsWrapper { top: 45px; }
+.title {
+	color:#fff;
+	font-size:1.7em;
+	padding:20px;
+	padding-top:30px;
+	position:relative;
+	top:20px;
+	left:1%
+}
+.titleName { font-size:1.3em }
+.facebook { background:url(../img/fc.png) no-repeat 50% 0px; }
+.seasonal { background:url(../img/ses.png) no-repeat 50% 0px; }
+.wellBeing { background:url(../img/well.png) no-repeat 50% 0px; }
+.facebook, .seasonal, .wellBeing {
+	background-size:180px 180px;
+	display:inline-block;
+	height:200px;
+	width:33%;
+	color:#7c7c7c;
+	font-weight:bold;
+	text-align:center;
+	line-height:27em
+}
+#scroller li.headerTxt {
+	color:#0150a5;
+	font-size:2em;
+	font-weight:bold;
+	padding:10px
+}
+
+#SearchScreen #scroller li.headerTxt{ padding:0px}
+.mask {
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+	background:#000;
+	opacity:0.5;
+	z-index:500
+}
+.loading{
+	position:absolute;
+	top:50%;
+	left:50%;
+	z-index:501;
+	display: none;
+}
+.popUp {
+	background:#fff;
+	position:absolute;
+	width:60%;
+	top:20%;
+	left:20%;
+	z-index:501;
+	border-radius:4px
+}
+.popUp .header {
+	background: -webkit-gradient(linear, 0 100%, 0 0, from(#236fd0), color-stop(100%, #9fc6f8));
+	padding:10px 5px 10px 10px;
+	border-radius:4px 4px 0 0;
+	color:#fff;
+	position:relative
+}
+.popUp .header span.close {
+	background:url(../img/close.png) no-repeat 50% 50%;
+	background-size:30px 30px;
+	display:inline-block;
+	width:33px;
+	height:33px;
+	position:absolute;
+	right:5px;
+	top:2px
+}
+.faceBookPopUp, .seasonalPopUp, .wellbeingPopUp { padding:10px }
+.popUp { color: #626060 }
+.popUp .button {
+	font-size:90%;
+	background: -webkit-gradient(linear, 0 100%, 0 0, from(#dddddd), color-stop(100%, #fff));
+	border-radius:4px;
+	border:1px solid #b2b2b2;
+	padding:2px 10px 2px 35px;
+	margin-bottom:10px
+}
+.popUp .faceBookPopUp .button:last-child, .popUp .seasonalPopUp .button:last-child, .popUp .wellbeingPopUp .button:last-child { margin-bottom:0px }
+.popUp .button:hover, .popUp .button:active { background: -webkit-gradient(linear, 0 100%, 0 0, from(#fff), color-stop(100%, #dddddd)); }
+.popUp .button ul {
+	background:url(../img/arrow.png) no-repeat 100% 50%;
+	background-size:12px 18px;
+}
+.popUp .button li.smallFont { font-size:80% }
+.popUp .button li { padding:2px 0px 2px 0px }
+.popUp .button { position:relative }
+.popUp .button li.icon {
+	position:absolute;
+	width:30px;
+	height:30px;
+	top:5px;
+	left:5px;
+	background:url(../img/pin.png) no-repeat 50% 50%;
+	background-size:28px 28px;
+}
+.popUp .faceBookPopUp .button span, .popUp .seasonalPopUp .button span, .popUp .wellbeingPopUp .button span { font-weight:bold }
+.popUpText {
+	border-bottom:1px solid #cccccc;
+	padding:5px;
+	color:#626060;
+	font-size:0.8em;
+}
+.maps { padding:5px; border:1px solid #609df0; margin:5px; border-radius:4px;box-shadow: 0px 0px 5px #ccc;}
+.maps iframe {
+	width:100% !important;
+	height:200px !important;
+}
+.placeDetails { padding:5px }
+.placeDetails .header {
+	background: -webkit-gradient(linear, 0 100%, 0 0, from(#236fd0), color-stop(100%, #9fc6f8));
+	padding:10px 5px 10px 10px;
+	border-radius:4px 4px 0 0;
+	color:#fff;
+}
+.placeDescription div { display:inline-block }
+.placeDescription div.image {
+	width:30%;
+	height:100px;
+	background:#ccc
+}
+.placeDescription div.content {overflow:hidden }
+.placeDescription div.content img {
+	width:100px;
+	float:left;
+	height:100px;
+	font-size:90%;
+	padding-right:5px
+}
+.placeDescription div.content{
+	font-size:85%;	padding:5px; overflow:hidden
+}
+.placeDescription div.content span{
+	display:block; 
+}
+.placeDescription div.content span.des{
+	display:block; height:75px; overflow:hidden; }
+.placeDetails.events .content{ overflow:hidden; display:inline-block}
+.placeDetails.events .content img{ width:100px; height:100px;}
+.placeDetails.events .content strong.name{ font-size:120%; margin-bottom:5px}
+.placeDetails.events .content,
+.placeDetails .content{ color:#5c5c5c}
+.placeDetails.events .placeDescription:nth-child(odd){ background:#f3f3f3; border-bottom:1px solid #ccc; border-top:1px solid #ccc}			
+			
+.container{ border:1px solid #609df0; border-radius:4px; box-shadow:0px 0px 5px #ccc}
+
+.popUp a{ text-decoration:none; margin-bottom:10px; color:#000; display:block}
+
+.popUp .faceBookPopUp a:last-child, .popUp .seasonalPopUp a:last-child, .popUp .wellbeingPopUp a:last-child { margin-bottom:0px }
+
+
+ @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+.images {
+	background:url(../img/travel2.jpg) 50% 0% no-repeat;
+	height:350px;
+	background-size:100%;
+	padding:5px;
+	width:100%;
+	margin:0% auto;
+	border:1px solid #468bd0;
+}
+#footer div.button { margin:0.6% auto; }
+
+div.cale ul.rowhead li, div.cale ul.columnhead li, div.cale div[role="grid"] li[role="gridcell"], div.cale div[role="grid"] li[role="gridcell"] div, div.cale div[role="grid"] li[role="columnheader"] div {
+	width: 135px;
+}
+div.cale div[role="grid"] li[role="rowheader"] div, div.cale ul.rowhead, div.cale h2.departure span, div.cale h2.departure {
+	width: 135px;
+}
+
+}
+
+
+/*Matrix cal*/
+
+/*Matrix calendar*/
+
+/*7 x 7 matrix*/
+/* calendar*/
+div.cale {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	margin-top:50px
+}
+div.cale div.swipe {
+	position: relative;
+}
+div.cale div.swipe div.scroller {
+	float: left;
+	padding: 0;
+	width: auto;
+	overflow: hidden;
+}
+div.cale div[role="grid"] {
+	display: table;
+	table-layout: fixed;
+	border-collapse: collapse;
+	position: relative;
+	width: auto;
+}
+div.cale .swipe div[role="grid"] {
+}
+div.cale div[role="grid"] ul[role="row"], div.cale div[role="grid"] li[role="rowheader"] {
+	display: table-row;
+}
+/*div.cale ul.columnhead,*/
+div.cale ul.rowhead {
+	position: absolute;
+	z-index: 1;
+}
+/* gridcell */
+div.cale ul.rowhead li, div.cale ul.columnhead li, div.cale h2 {
+	margin: 0;
+}
+div.cale h2.departure span, div.cale div[role="grid"] li[role="gridcell"], div.cale div[role="grid"] li[role="rowheader"] div, div.cale div[role="grid"] li[role="columnheader"] {
+	margin: 0;
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+	overflow: hidden;
+	padding: 0px !important
+}
+div.cale div[role="grid"] li[role="gridcell"] {
+	cursor: pointer;
+}
+/* cells width / height */
+div.cale div.swipe div.scroller {
+	height: 330px;
+}
+div.cale h2 span, div.cale ul.rowhead li, div.cale ul.columnhead li, div.cale div[role="grid"] li[role="gridcell"], div.cale div[role="grid"] li[role="rowheader"], div.cale div[role="grid"] li[role="rowheader"] div {
+	height: 40px;
+}
+div.cale ul.rowhead {
+	margin-top: 41px;
+} /* link to upper */
+div.cale ul.rowhead li, div.cale ul.columnhead li, div.cale div[role="grid"] li[role="gridcell"], div.cale div[role="grid"] li[role="gridcell"] div, div.cale div[role="grid"] li[role="columnheader"] div {
+	width: 100px;
+}
+div.cale div[role="grid"] li[role="rowheader"] div, div.cale ul.rowhead, div.cale h2.departure span, div.cale h2.departure {
+	width: 100px;
+}
+
+
+ul[role="row"] li, ul.rowhead li {
+	border: 1px solid #dddddd;
+}
+li[role="rowheader"] div {
+	width: 90px;
+}
+div.cale div[role="grid"] {
+	margin-left: 90px;
+}  /* link to upper */
+/**/ 
+ul[role="grid"] {
+	position: relative;
+}
+div.cale h2.departure + div[role="grid"] {
+	margin-left: 0px;
+}
+.returnSelected {
+	position: absolute;
+	background: url(../img/rightArrow.png) no-repeat;
+	-webkit-background-size: 87px 10px;
+	width: 87px;
+	height: 10px;
+	top: 40px
+}
+.departureSelected {
+	position: absolute;
+	background: url(../img/left_arrow.png) no-repeat;
+	-webkit-background-size: 12px 41px;
+	width: 12px;
+	height: 40px;
+	right: -12px;
+	top: 0px;
+}
+.rowhead li {
+	width: 90px;
+	height: 40px;
+	display: table-row
+}
+.rowhead li div {
+	width: 90px;
+	height: 40px;
+	text-align: center;
+}
+div.cale h2.departure {
+	padding-top: 2px;
+	height: 40px
+}
+div.cale {
+	text-align: center;
+}
+div.cale h2 {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	text-align: center;
+}
+div.cale li div span, div.cale li span.currency, div.cale li em {
+	display: block;
+}
+div.cale h2.departure {
+	overflow: hidden;
+}
+h2.return {
+	background: #76abed;
+	color: #fff;
+}
+h2.departure {
+	background: #1c1c1c url(../img/departureCalendar.png) no-repeat 20px 50%;
+	text-indent: -9999px;
+	background-size: 30px 30px
+}
+h2.return {
+	height: 20px;
+	display: block;
+	width: 100%
+}
+li[role="rowheader"] .selected, .selected, .matrixOneway li.selected, .flightAvailability .selected, li[role="columnheader"].selected, div.cale div[role="grid"] li[role="columnheader"].selected {
+	background: #559bdd;
+}
+li[role="columnheader"].selected span, ul.rowhead div.date.selected span {
+	color: #fff !important
+}
+li[role="rowheader"] .selected {
+	position : relative;
+}
+.matrixOneway li {
+	height: 40px;
+}
+.navigationMatrix {
+	background: #76abed;
+	color: #fff;
+	padding: 5px;
+	text-align: center;
+}
+.arrowRight, .arrowLeft {
+	background-size: 12px 13px;
+	-moz-background-size: 12px 13px;
+	-o-background-size: 12px 13px;
+	-webkit-background-size: 12px 13px;
+	width: 30px;
+	background: #333
+}
+.arrowRight {
+	float: right;
+	background: url(../img/arrow_right_white.png) 100% 50% no-repeat;
+}
+.arrowLeft {
+	background: url(../img/arrow_left_white.png) 0% 50% no-repeat;
+	float: left
+}
+.wrapperOuter {
+	font-size: 90%
+}
+.wrapperOuter section {
+	width: 100%;
+	margin: 0px;
+	border: 0px
+}
+.rowhead li div, .columnhead li div, .columnhead li div.date {
+	position: relative
+}
+.date span:first-child, .date span:nth-child(2) {
+	font-size: 75%;
+	position: absolute;
+	color: #929292;
+	left: 14px;
+}
+.date span:first-child {
+	top: 6px
+}
+.date span:nth-child(2) {
+	color: #929292;
+	font-weight: bold;
+	bottom: 6px
+}
+.date span:nth-child(3) {
+	color: #212121;
+	font-weight: bold;
+	font-size: 2em;
+	position: relative;
+	left: 12px;
+	bottom: -3px
+}
+.columnhead li div.date span:nth-child(2) {
+	color: #929292;
+	font-weight: bold;
+	bottom: 2px
+}
+ul[role="row"].selected, ul[role="row"] li[role="gridcell"].selected {
+	background: #f5f5f5;
+}
+div.cale ul.rowhead, div.cale div[role="grid"] li[role="columnheader"] {
+	background: #dcdcdc
+}
+.value {
+	color: #559bdd;
+	font-weight: bold;
+	font-size: 1.3em
+}
+.currency {
+	font-size: .6em
+}
+.bestDeal {
+	background: #cce1f6
+}
+div.cale h2.departure {
+	overflow: visible
+}
+div.cale h2.departure span.departureIco {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	overflow: visible;
+	display: block
+}
+.departureIco:after {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	bottom: -1px;
+	content: "";
+	height: 40px;
+	background: url(../img/calArrow.png) no-repeat -1px 10px;
+	background-size: 40px 35px;
+	right: -18px
+}
+.departureIco:before {
+	position: absolute;
+	width: 30px;
+	content: "";
+	height: 40px;
+	background: url(../img/greyTriangle.png) no-repeat 100% 8px;
+	background-size: 13px 26px;
+	right: -10px
+}
+.rowhead li div.date.selected:before {
+	content: "";
+	position: absolute;
+	width: 30px;
+	height: 40px;
+	right: -5px;
+	background: url(../img/selectedLeft.png) no-repeat 100% 7px;
+	background-size: 8px 25px;
+}
+div.cale div[role="grid"] li[role="columnheader"].selected {
+	overflow: visible
+}
+li[role="columnheader"].selected {
+	overflow: visible;
+	position: relative
+}
+li[role="columnheader"].selected:before {
+	content: "";
+	position: absolute;
+	width: 50px;
+	height: 40px;
+	bottom: -5px;
+	left: 20px;
+	background: url(../img/selectedTop.png) no-repeat 50% 100%;
+	background-size: 25px 8px;
+}
+
+
+
+.tripPanelTextBox {
+	border-radius: 20px;
+	border: 2px solid #fff;
+	background: #559bdd;
+	color: #fff;
+	font-weight: bold;
+	font-size: 100%;
+	width: 28px;
+	height: 25px;
+	text-align: center;/*	position:relative;
+	top:2px;*/
+}

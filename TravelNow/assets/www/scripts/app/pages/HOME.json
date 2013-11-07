@@ -1,0 +1,21 @@
+{
+    contents : {
+        placeholderContents : {
+        },
+        menus : {
+        }
+    },
+    pageComposition : {
+        template : "app.templates.home.HomeLayout",
+        css : [], // available since Aria Templates 1.3-7
+        placeholders : {},
+        modules : {}
+    },
+    pageId : "HOME",
+    url : "/home",
+    title : "Travel Now | Home",
+    animation : { // available since Aria Templates 1.4-2
+        animateIn : "slide left",
+        animateOut : "slide right"
+    }
+}

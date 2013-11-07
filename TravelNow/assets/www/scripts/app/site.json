@@ -1,0 +1,28 @@
+{
+    containerId : "homeScreen",
+    appData : {
+        navigation : {
+            main_menu : [{
+                title : "Search",
+                pageId : "HOME",
+            }]
+        }
+    },
+    navigation : "hash",
+    commonModules : {
+        "friends" : {
+            classpath : "app.modules.Friends",
+            priority : 2
+        },
+        "seasonal" : {
+            classpath : "app.modules.Seasonal",
+            priority : 2
+        },
+        "age" : {
+            classpath : "app.modules.Age",
+            priority : 2
+        }
+    },
+    css : [], // available since Aria Templates 1.3-7
+    animations : false // available since Aria Templates 1.4-2
+}

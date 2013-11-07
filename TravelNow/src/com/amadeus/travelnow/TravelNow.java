@@ -19,8 +19,12 @@
 
 package com.amadeus.travelnow;
 
+import org.apache.cordova.Config;
+import org.apache.cordova.DroidGap;
+
+
+import android.R;
 import android.os.Bundle;
-import org.apache.cordova.*;
 
 public class TravelNow extends DroidGap
 {
